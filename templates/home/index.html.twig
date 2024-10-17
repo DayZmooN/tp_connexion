@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>hello</p>
+    {% else %}
+        <p>coco</p>
+
+        {% if users is not empty %}
+            {% for user in users %}
+                <p>{{ user }} : {{ user.roles | join(', ') }}</p>
+            {% else %}
+                <p>Aucun rôle</p>
+            {% endfor %}
+        {% else %}
+            <p>Aucun utilisateur trouvé</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
