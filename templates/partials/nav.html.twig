@@ -5,17 +5,44 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                {% if is_granted('ROLE_USER') %}
-                    <a href="{{ path('app_logout') }}">se deconnecter</a>
-{#                    <a href="{{ path('app_profile') }}">{{ app.user.email }}</a>#}
-                    <a href="">{{ app.user.email }}</a>
-                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link {{ app.current_route == 'register' ? 'active' : '' }}" href="{{ path('register') }}">S'inscrire</a>
-                    <a class="nav-link {{ app.current_route == 'app_login' ? 'active': '' }}" href="{{ path('app_login') }}">Se connecter</a>
-                </li>
+            <ul class="navbar-nav ms-auto">
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li>
+                        <a class="nav-link" href="{{ path('app_super_admin') }}">Super Admin</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
+                    </li>
+                {% elseif is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
+                    </li>
+                {% elseif is_granted('ROLE_UTILISATEUR') %}
+                    <li>
+                        <a class="nav-link" href="{{ path('profil.index') }}">{{ app.user.email }}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ app.current_route == 'register' ? 'active' : '' }}" href="{{ path('register') }}">S'inscrire</a>
+                        <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
                 {% endif %}
+
+                {% if app.user %}
+                    <li>
+                        <a class="nav-link" href="{{ path('profil.index') }}">{{ app.user.email }}</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+                {% endif %}
+            </ul>
             </ul>
         </div>
     </div>

@@ -5,4 +5,10 @@
 {% block body %}
 <h1>HELLO {{ app.user.email }}</h1>
 
+    {% if is_granted("ROLE_ADMIN") %}
+    <p>je suis admin</p>
+    {% else %}
+    <p>Vous n'avez le bon role ;) </p>
+    {% endif %}
+
 {% endblock %}
