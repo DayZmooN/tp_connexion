@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des Voitures{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="container mt-4">
+            <h1 class="mb-4">Index des Voitures</h1>
+
+            <a href="{{ path('admin.voiture.app_voiture_new') }}" class="btn btn-primary mb-3">Créer une nouvelle voiture</a>
+
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Modèle</th>
+                    <th>Marque</th>
+                    <th>Composants</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if voitures is empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">Aucun enregistrement trouvé</td>
+                    </tr>
+                {% else %}
+                    {% for voiture in voitures %}
+                        <tr>
+                            <td>{{ voiture.id }}</td>
+                            <td>{{ voiture.model }}</td>
+                            <td>{{ voiture.marque.name }}</td>
+                            <td>
+                                <ul class="list-unstyled mb-0">
+                                    {% for composant in voiture.composant %}
+                                        <li>{{ composant.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ voiture.price | number_format(2, '.', ',') }} €</td>
+                            <td>
+                                <a href="{{ path('admin.voiture.show', {'id': voiture.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                                <a href="{{ path('admin.voiture.edit', {'id': voiture.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+    {% elseif is_granted('ROLE_USER') %}
+        <div class="container mt-4">
+            <h1 class="mb-4">Index des Voitures</h1>
+
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Modèle</th>
+                    <th>Marque</th>
+                    <th>Composants</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if voitures is empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">Aucun enregistrement trouvé</td>
+                    </tr>
+                {% else %}
+                    {% for voiture in voitures %}
+                        <tr>
+                            <td>{{ voiture.model }}</td>
+                            <td>{{ voiture.marque.name }}</td>
+                            <td>
+                                <ul class="list-unstyled mb-0">
+                                    {% for composant in voiture.composant %}
+                                        <li>{{ composant.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ voiture.price | number_format(2, '.', ',') }} €</td>
+                            <td>
+                                <a href="{{ path('user.voiture.show', {'id': voiture.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-4" role="alert">
+            Ce contenu est réservé aux administrateurs.
+        </div>
+    {% endif %}
+{% endblock %}

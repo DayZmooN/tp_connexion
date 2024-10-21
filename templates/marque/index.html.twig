@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des Marques{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="container mt-4">
+            <h1 class="mb-4">Index des Marques</h1>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for marque in marques %}
+                    <tr>
+                        <td>{{ marque.id }}</td>
+                        <td>{{ marque.name }}</td>
+                        <td>
+                            <a href="{{ path('app_marque_show', {'id': marque.id}) }}" class="btn btn-info btn-sm">Afficher</a>
+                            <a href="{{ path('app_marque_edit', {'id': marque.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <form action="{{ path('app_marque_disable', {'id': marque.id}) }}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir désactiver cette marque ?');">Désactiver</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center">Aucun enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('app_marque_new') }}" class="btn btn-primary">Créer une nouvelle marque</a>
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-4" role="alert">
+            Ce contenu est réservé aux administrateurs.
+        </div>
+    {% endif %}
+{% endblock %}

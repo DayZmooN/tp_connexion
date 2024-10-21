@@ -8,10 +8,25 @@
             <ul class="navbar-nav ms-auto">
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li>
-                        <a class="nav-link" href="{{ path('app_super_admin') }}">Super Admin</a>
+                        <a class="nav-link" href="{{ path('super-admin.index') }}">Super Admin</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('admin.voiture.index') }}">Voitures</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_marque_index') }}">Marque</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_composant_index') }}">Composant</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('super-admin.archive.voiture') }}">Archive Voiture</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('super-admin.archive.marque') }}">Archive Marque</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
@@ -23,9 +38,17 @@
                     <li>
                         <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
                     </li>
+                    <a class="nav-link" href="{{ path('admin.voiture.index') }}">Voitures</a>
+
+                    <li>
+                        <a class="nav-link" href="{{ path('app_marque_index') }}">Marque</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_composant_index') }}">Composant</a>
+                    </li>
                 {% elseif is_granted('ROLE_UTILISATEUR') %}
                     <li>
-                        <a class="nav-link" href="{{ path('profil.index') }}">{{ app.user.email }}</a>
+                        <a class="nav-link" href="{{ path('user.voiture.index') }}">Liste des voitures</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
