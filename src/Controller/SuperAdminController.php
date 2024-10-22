@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted("ROLE_SUPER_ADMIN")]
-#[Route('/super-admin', name: 'super-admin.')]
+#[Route('/superadmin', name: 'super-admin.')]
 class SuperAdminController extends AbstractController
 {
     #[Route('', name: 'index')]
@@ -108,7 +108,7 @@ class SuperAdminController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('super-admin.index');
+        return $this->redirectToRoute('super-admin.archive.voiture');
     }
 
 

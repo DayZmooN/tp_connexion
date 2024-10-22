@@ -8,13 +8,16 @@
             <ul class="navbar-nav ms-auto">
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li>
-                        <a class="nav-link" href="{{ path('super-admin.index') }}">Super Admin</a>
+                        <a class="nav-link" href="{{ path('super-admin.index') }}">Super Admin accueille</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_utilisateur_index') }}">Liste des utilisateur</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('admin.voiture.index') }}">Voitures</a>
+                        <a class="nav-link" href="{{ path('voiture.index') }}">Voitures</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ path('app_marque_index') }}">Marque</a>
@@ -38,7 +41,7 @@
                     <li>
                         <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
                     </li>
-                    <a class="nav-link" href="{{ path('admin.voiture.index') }}">Voitures</a>
+                    <a class="nav-link" href="{{ path('voiture.index') }}">Voitures</a>
 
                     <li>
                         <a class="nav-link" href="{{ path('app_marque_index') }}">Marque</a>
@@ -48,13 +51,17 @@
                     </li>
                 {% elseif is_granted('ROLE_UTILISATEUR') %}
                     <li>
-                        <a class="nav-link" href="{{ path('user.voiture.index') }}">Liste des voitures</a>
+                        <a class="nav-link" href="{{ path('voiture.index') }}">Liste des voitures</a>
                     </li>
+                    <li>
+                    <a class="nav-link" href="{{ path('app_marque_index') }}"> liste des Marques </a>
+                </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link {{ app.current_route == 'register' ? 'active' : '' }}" href="{{ path('register') }}">S'inscrire</a>
                         <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href="{{ path('app_login') }}">Se connecter</a>
                     </li>
+
                 {% endif %}
 
                 {% if app.user %}

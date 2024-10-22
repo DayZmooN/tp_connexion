@@ -121,4 +121,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->roles[]=$role;
     }
+
+    public function suppRole(string $role): void
+    {
+        // Récupère les rôles actuels
+        $roles = $this->getRoles();
+
+        // Vérifie si le rôle existe et le retire
+        if (in_array($role, $roles)) {
+            // Retire le rôle de l'array
+            $roles = array_diff($roles, [$role]);
+            // Réassigne le tableau modifié
+            $this->setRoles($roles);
+        }
+    }
+
 }

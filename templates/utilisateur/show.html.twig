@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'Utilisateur{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="mb-3">
+            <a href="{{ path('app_utilisateur_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        </div>
+        <h1>Détails de l'Utilisateur</h1>
+
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ utilisateur.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ utilisateur.email }}</td>
+            </tr>
+            <tr>
+                <th>Rôles</th>
+                <td>{{ utilisateur.roles ? utilisateur.roles|join(', ') : 'Aucun' }}</td>
+            </tr>
+            <tr>
+                <th>Mot de passe</th>
+                <td>**********</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+        {{ include('utilisateur/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

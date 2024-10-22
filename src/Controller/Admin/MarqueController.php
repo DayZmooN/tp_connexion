@@ -5,22 +5,26 @@ namespace App\Controller\Admin;
 use App\Entity\Marque;
 use App\Form\MarqueType;
 use App\Repository\MarqueRepository;
+use App\Repository\VoitureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/marque')]
 final class MarqueController extends AbstractController
 {
-    #[Route(name: 'app_marque_index', methods: ['GET'])]
-    public function index(MarqueRepository $marqueRepository): Response
-    {
-        return $this->render('marque/index.html.twig', [
-            'marques' => $marqueRepository->findAll(),
-        ]);
-    }
+
+    //same view user and admin
+//    #[Route(name: 'app_marque_index', methods: ['GET'])]
+//    public function index(MarqueRepository $marqueRepository): Response
+//    {
+//        return $this->render('marque/index.html.twig', [
+//            'marques' => $marqueRepository->findAll(),
+//        ]);
+//    }
 
     #[Route('/new', name: 'app_marque_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -62,7 +66,7 @@ final class MarqueController extends AbstractController
             return $this->redirectToRoute('app_marque_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('marque/edit.html.twig', [
+        return $this->render('admin/marque/edit.html.twig', [
             'marque' => $marque,
             'form' => $form,
         ]);
@@ -75,6 +79,27 @@ final class MarqueController extends AbstractController
             $entityManager->remove($marque);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('app_marque_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route("/disable/{id}", name: 'app_marque_disable', methods: ['POST'])]
+    public function disable( Marque $marque, EntityManagerInterface $entityManager,VoitureRepository $voitureRepository): Response
+    {
+        $marque->setArchive(false);
+
+        $voitures = $voitureRepository->findBy(['marque' => $marque]);
+
+        foreach ($voitures as $voiture) {
+            $voiture->setArchive(false);
+            $entityManager->persist($voiture);
+        }
+        $entityManager->persist($marque);
+        $entityManager->flush();
+
+        $this->addFlash('success','La marque et ses voiture on ete desactiver');
 
         return $this->redirectToRoute('app_marque_index', [], Response::HTTP_SEE_OTHER);
     }
