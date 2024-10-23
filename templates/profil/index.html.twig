@@ -5,7 +5,7 @@
 {% block body %}
 <h1>HELLO {{ app.user.email }}</h1>
 
-    {% if is_granted("ROLE_ADMIN") %}
+    {% if is_granted("ROLE_USER") %}
     <button class="btn ">je suis {{ app.user.roles | join(', ') }}</button>
     {% else %}
     <p>Vous n'avez le bon role ;) </p>

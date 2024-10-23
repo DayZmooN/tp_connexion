@@ -1,0 +1,29 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+
+<div class="container mt-5">
+
+    <div class="alert alert-danger d-none my-custom-class-for-errors" role="alert">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
+        {{ form_row(form.email) }}
+        <div id="emailHelp" class="form-text">Nous ne partagerons jamais votre e-mail avec qui que ce soit.</div>
+        <div class="invalid-feedback">
+            Veuillez entrer une adresse e-mail valide.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+        {{ form_row(form.password) }}
+        <div class="invalid-feedback">
+            Veuillez entrer votre mot de passe.
+        </div>
+    </div>
+ 
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+</div>
+
+{{ form_end(form) }}

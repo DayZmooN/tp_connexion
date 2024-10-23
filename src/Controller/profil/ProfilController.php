@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\profil;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-
 #[Route('/profil', name: 'profil.')]
 class ProfilController extends AbstractController
 {
@@ -14,9 +13,9 @@ class ProfilController extends AbstractController
     #[Route('', name: 'index')]
     public function index(): Response
     {
-//        if (!$this->isGranted("ROLE_ADMIN")) {
-//            return $this->redirectToRoute("home.index");
-//        }
+        if ($this->isGranted(false)) {
+            return $this->redirectToRoute("home.index");
+        }
 
         if($this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('success', 'Bienvenue sur le profil '.$this->getUser()->getEmail());
@@ -25,14 +24,5 @@ class ProfilController extends AbstractController
 
         ]);
     }
-    #[IsGranted("ROLE_ADMIN")]
-    public function modifierProfil(): Response
-    {
-        if (!$this->isGranted("ROLE_ADMIN")) {
-            return $this->redirectToRoute("home.index");
-        }
-        return $this->render('profil/index.html.twig', [
 
-        ]);
-    }
 }
