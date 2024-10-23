@@ -28,6 +28,9 @@ class Marque
     #[ORM\Column]
     private ?bool $archive = false;
 
+    #[ORM\ManyToOne]
+    private ?Media $media = null;
+
     public function __construct()
     {
         $this->voiture = new ArrayCollection();
@@ -99,6 +102,18 @@ class Marque
     public function getArchive(): bool
     {
         return $this->archive;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
+
+        return $this;
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Marque;
+use App\Entity\Media;
 use App\Form\MarqueType;
 use App\Repository\MarqueRepository;
 use App\Repository\VoitureRepository;
@@ -34,13 +35,30 @@ final class MarqueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $infos =$form['media']->getData();
+            if($infos){
+            $media = new Media();
+            $newMedia =uniqid().'.'.$infos->getExtension();
+            $media->setChemin($newMedia);
+            $media->setName($infos->getClientOriginalName());
+            $media->setTaille($infos->getSize());
+            $media->setExtension($infos->getMimeType());
+
+
+                $infos->move(
+                            "uploads/image",
+                            $media->getName()
+            );
+            $marque->setMedia($media);
+            $entityManager->persist($media);
+            }
             $entityManager->persist($marque);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_marque_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('marque/new.html.twig', [
+        return $this->render('admin/marque/new.html.twig', [
             'marque' => $marque,
             'form' => $form,
         ]);
@@ -61,8 +79,34 @@ final class MarqueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $infos =$form['media']->getData();
+            if($infos){
+                if ($marque->getMedia())
+                {
+                    $oldMeda = 'uploads/image/'.$marque->getMedia()->getName();
+                    if (file_exists($oldMeda)) {
+                        unlink($oldMeda);
+                    }
+                }
+                $media = $marque->getMedia()   ?:  new Media();
+                $newMedia =uniqid().'.'.$infos->guessExtension();
+                $media->setName($newMedia);
+                $media->setTaille($infos->getSize());
+                $media->setExtension($infos->getMimeType());
+                $media->setChemin($infos->getClientOriginalName());
 
+                $infos->move(
+                    "uploads/image",
+                    $newMedia
+                );
+                $marque->setMedia($media);
+                if (!$media->getId()){
+                    $entityManager->persist($media);
+                }
+
+            }
+
+            $entityManager->flush();
             return $this->redirectToRoute('app_marque_index', [], Response::HTTP_SEE_OTHER);
         }
 

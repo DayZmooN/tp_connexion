@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Marque;
+use App\Entity\Media;
 use App\Entity\Voiture;
 use App\Form\MarqueType;
 use App\Repository\MarqueRepository;
@@ -24,7 +25,6 @@ final class MarqueController extends AbstractController
     #[Route(path:'',name: 'app_marque_index', methods: ['GET'])]
     public function index(MarqueRepository $marqueRepository): Response
     {
-
 
         return $this->render('marque/index.html.twig', [
             'marques' => $marqueRepository->findActiveMarque(),

@@ -18,7 +18,18 @@
                             <tr>
                                 <th scope="row">Nom</th>
                                 <td>{{ marque.name }}</td>
+                                <th scope="row">Image</th>
+                                <td>
+                                    {% if marque.media %}
+                                    <img height="330PX" src="{{ asset('uploads/image/' ~ marque.media.name ) }}" alt="{{ marque.media.chemin }}">
+                                        {% else %}
+                                        <p>Aucune image </p>
+                                    {% endif %}
+                                </td>
+
                             </tr>
+
+
                             </tbody>
                         </table>
                     </div>
