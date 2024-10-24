@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+        <!-- Homepage -->
+      <trans-unit id="comments" resname="Comments">
+        <source>Comments</source>
+        <target>Commentaires</target>
+      </trans-unit>
+      <trans-unit id="notUserFound" resname="not user found">
+        <source>not user found</source>
+        <target>Aucun utilisateur trouvé</target>
+      </trans-unit>
+
+        <!-- Route /voiture -->
+      <trans-unit id="carsIndex" resname="Cars Index">
+        <source>Cars Index</source>
+        <target>Liste de Voitures</target>
+      </trans-unit>
+      <trans-unit id="createNewCar" resname="Create a new car">
+        <source>Create a new car</source>
+        <target>Créer une nouvelle voiture</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFound" resname="No records found">
+        <source>No records found</source>
+        <target>Aucun enregistrement trouvé</target>
+      </trans-unit>
+      <trans-unit id="view" resname="View">
+        <source>View</source>
+        <target>Voir</target>
+      </trans-unit>
+      <trans-unit id="edit" resname="Edit">
+        <source>Edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="id" resname="Id">
+        <source>Id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="model" resname="Model">
+        <source>Model</source>
+        <target>Modèle</target>
+      </trans-unit>
+      <trans-unit id="brand" resname="Brand">
+        <source>Brand</source>
+        <target>Marque</target>
+      </trans-unit>
+      <trans-unit id="components" resname="Components">
+        <source>Components</source>
+        <target>Composants</target>
+      </trans-unit>
+      <trans-unit id="price" resname="Price">
+        <source>Price</source>
+        <target>Prix</target>
+      </trans-unit>
+
+      <!-- Nav -->
+      <trans-unit id="navbar.brandName" resname="My Site">
+        <source>My Site</source>
+        <target>Mon Site</target>
+      </trans-unit>
+      <trans-unit id="navbar.toggle" resname="Toggle navigation">
+        <source>Toggle navigation</source>
+        <target>Basculer la navigation</target>
+      </trans-unit>
+      <trans-unit id="navbar.superAdmin" resname="Super Admin Dashboard">
+        <source>Super Admin Dashboard</source>
+        <target>Tableau de bord Super Admin</target>
+      </trans-unit>
+      <trans-unit id="navbar.userList" resname="User List">
+        <source>User List</source>
+        <target>Liste des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="navbar.myProfile" resname="My Profile">
+        <source>My Profile</source>
+        <target>Mon Profil</target>
+      </trans-unit>
+      <trans-unit id="navbar.cars" resname="Cars">
+        <source>Cars</source>
+        <target>Voitures</target>
+      </trans-unit>
+      <trans-unit id="navbar.component" resname="Component">
+        <source>Component</source>
+        <target>Composant</target>
+      </trans-unit>
+      <trans-unit id="navbar.archiveCars" resname="Archive Cars">
+        <source>Archive Cars</source>
+        <target>Archive des Voitures</target>
+      </trans-unit>
+      <trans-unit id="navbar.archiveBrands" resname="Archive Brands">
+        <source>Archive Brands</source>
+        <target>Archive des Marques</target>
+      </trans-unit>
+      <trans-unit id="navbar.admin" resname="Admin">
+        <source>Admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="navbar.register" resname="Register">
+        <source>Register</source>
+        <target>S'inscrire</target>
+      </trans-unit>
+      <trans-unit id="navbar.login" resname="Login">
+        <source>Login</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="navbar.logout" resname="Logout">
+        <source>Logout</source>
+        <target>Se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="navbar.carList" resname="Car List">
+        <source>Car List</source>
+        <target>Liste des voitures</target>
+      </trans-unit>
+      <trans-unit id="navbar.brandList" resname="Brand List">
+        <source>Brand List</source>
+        <target>Liste des Marques</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

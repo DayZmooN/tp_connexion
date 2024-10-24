@@ -1,79 +1,84 @@
 <nav class="navbar bg-body-tertiary navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('home.index') }}">Mon Site</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="{{ path('index') }}">{{ 'My Site'|trans }}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="{{ 'Toggle navigation'|trans }}">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li>
-                        <a class="nav-link" href="{{ path('super-admin.index') }}">Super Admin accueille</a>
+                        <a class="nav-link" href="{{ path('super-admin.index') }}">{{ 'Super Admin Dashboard'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('app_utilisateur_index') }}">Liste des utilisateur</a>
+                        <a class="nav-link" href="{{ path('app_utilisateur_index') }}">{{ 'User List'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
+                        <a class="nav-link" href="{{ path('profil.index') }}">{{ 'My Profile'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('voiture.index') }}">Voitures</a>
+                        <a class="nav-link" href="{{ path('voiture.index') }}">{{ 'Cars'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('app_marque_index') }}">Marque</a>
+                        <a class="nav-link" href="{{ path('app_marque_index') }}">{{ 'Brand'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('app_composant_index') }}">Composant</a>
+                        <a class="nav-link" href="{{ path('app_composant_index') }}">{{ 'Component'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('super-admin.archive.voiture') }}">Archive Voiture</a>
+                        <a class="nav-link" href="{{ path('super-admin.archive.voiture') }}">{{ 'Archive Cars'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('super-admin.archive.marque') }}">Archive Marque</a>
+                        <a class="nav-link" href="{{ path('super-admin.archive.marque') }}">{{ 'Archive Brands'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
+                        <a class="nav-link" href="{{ path('app_admin') }}">{{ 'Admin'|trans }}</a>
                     </li>
                 {% elseif is_granted('ROLE_ADMIN') %}
                     <li>
-                        <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
+                        <a class="nav-link" href="{{ path('app_admin') }}">{{ 'Admin'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('profil.index') }}">Mon Profil</a>
-                    </li>
-                    <a class="nav-link" href="{{ path('voiture.index') }}">Voitures</a>
-
-                    <li>
-                        <a class="nav-link" href="{{ path('app_marque_index') }}">Marque</a>
+                        <a class="nav-link" href="{{ path('profil.index') }}">{{ 'My Profile'|trans }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('app_composant_index') }}">Composant</a>
-                    </li>
-                {% elseif is_granted('ROLE_UTILISATEUR') %}
-                    <li>
-                        <a class="nav-link" href="{{ path('profil.index') }}">Profil</a>
+                        <a class="nav-link" href="{{ path('voiture.index') }}">{{ 'Cars'|trans }}</a>
                     </li>
                     <li>
-                    <li>
-                        <a class="nav-link" href="{{ path('voiture.index') }}">Liste des voitures</a>
+                        <a class="nav-link" href="{{ path('app_marque_index') }}">{{ 'Brand'|trans }}</a>
                     </li>
                     <li>
-                    <a class="nav-link" href="{{ path('app_marque_index') }}"> liste des Marques </a>
-                </li>
+                        <a class="nav-link" href="{{ path('app_composant_index') }}">{{ 'Component'|trans }}</a>
+                    </li>
+                {% elseif is_granted('ROLE_USER') %}
+                    <li>
+                        <a class="nav-link" href="{{ path('profil.index') }}">{{ 'Profile'|trans }}</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('voiture.index') }}">{{ 'Car List'|trans }}</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_marque_index') }}">{{ 'Brand List'|trans }}</a>
+                    </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link {{ app.current_route == 'register' ? 'active' : '' }}" href="{{ path('register') }}">S'inscrire</a>
-                        <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href="{{ path('app_login') }}">Se connecter</a>
+                        <a class="nav-link {{ app.current_route == 'register' ? 'active' : '' }}" href="{{ path('register') }}">{{ 'Register'|trans }}</a>
+                        <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href="{{ path('app_login') }}">{{ 'Login'|trans }}</a>
                     </li>
-
                 {% endif %}
-
+                <li class="nav-item">
+                    {% for locale in locales %}
+                        {% if locale != app.request.locale %}
+                            <a class="nav-link" href="{{ path('change_locale', {'locale': locale}) }}">{{ locale }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </li>
                 {% if app.user %}
                     <li>
                         <a class="nav-link" href="{{ path('profil.index') }}">{{ app.user.email }}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                        <a class="nav-link" href="{{ path('app_logout') }}">{{ 'Logout'|trans }}</a>
                     </li>
                 {% endif %}
             </ul>

@@ -15,7 +15,10 @@
                 <p>Aucun rôle</p>
             {% endfor %}
         {% else %}
-            <p>Aucun utilisateur trouvé</p>
+            <p>{% trans %}not user found{% endtrans %}</p>
         {% endif %}
     {% endif %}
+
+{#    {{ dump(app.request.locale) }}#}
+    <h2>{{ 'Comments' | trans }}</h2>
 {% endblock %}

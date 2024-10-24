@@ -21,7 +21,6 @@ class ProfilController extends AbstractController
             $this->addFlash('success', 'Bienvenue sur le profil '.$this->getUser()->getEmail());
         }
         return $this->render('profil/index.html.twig', [
-
         ]);
     }
 

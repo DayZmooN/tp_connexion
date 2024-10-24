@@ -1,32 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Index des Voitures{% endblock %}
+{% block title %}{% trans %}Cars Index{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
-        <h1 class="mb-4">Index des Voitures</h1>
+        <h1 class="mb-4">{% trans %}Cars Index{% endtrans %}</h1>
 
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
-            <a href="{{ path('voiture.app_voiture_new') }}" class="btn btn-primary mb-3">Créer une nouvelle voiture</a>
+            <a href="{{ path('voiture.app_voiture_new') }}" class="btn btn-primary mb-3">{% trans %}Create a new car{% endtrans %}</a>
         {% endif %}
 
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
             <tr>
                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
-                    <th>Id</th>
+                    <th>{% trans %}Id{% endtrans %}</th>
                 {% endif %}
-                <th>Modèle</th>
-                <th>Marque</th>
-                <th>Composants</th>
-                <th>Prix</th>
-                <th>Actions</th>
+                <th>{% trans %}Model{% endtrans %}</th>
+                <th>{% trans %}Brand{% endtrans %}</th>
+                <th>{% trans %}Components{% endtrans %}</th>
+                <th>{% trans %}Price{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
             </thead>
             <tbody>
             {% if voitures is empty %}
                 <tr>
-                    <td colspan="{{ is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') ? 6 : 5 }}" class="text-center">Aucun enregistrement trouvé</td>
+                    <td colspan="{{ is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') ? 6 : 5 }}" class="text-center">{% trans %}No records found{% endtrans %}</td>
                 </tr>
             {% else %}
                 {% for voiture in voitures %}
@@ -45,10 +45,9 @@
                         </td>
                         <td>{{ voiture.price | number_format(2, '.', ',') }} €</td>
                         <td>
-                            <a href="{{ path('voiture.show', {'id': voiture.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                            <a href="{{ path('voiture.show', {'id': voiture.id}) }}" class="btn btn-info btn-sm">{% trans %}View{% endtrans %}</a>
                             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
-                                <a href="{{ path('voiture.edit', {'id': voiture.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
-{#                                <a href="{{ path('') }}"></a>#}
+                                <a href="{{ path('voiture.edit', {'id': voiture.id}) }}" class="btn btn-warning btn-sm">{% trans %}Edit{% endtrans %}</a>
                             {% endif %}
                         </td>
                     </tr>
@@ -56,7 +55,5 @@
             {% endif %}
             </tbody>
         </table>
-
-
     </div>
 {% endblock %}
